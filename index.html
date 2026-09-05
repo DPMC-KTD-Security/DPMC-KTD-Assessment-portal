@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DPMC Security KTD Assessment Portal</title>
+</head>
+
+<body>
+
+<h1>DPMC Security KTD Assessment Portal</h1>
+
+<p>Enter your registered email address.</p>
+
+<input id="email" type="email">
+
+<button onclick="searchResults()">
+View Results
+</button>
+
+<div id="results"></div>
+
+<script>
+
+async function searchResults(){
+
+const email =
+document.getElementById("email").value;
+
+document.getElementById("results").innerHTML =
+"Searching for: " + email;
+
+}
+
+</script>
+
+</body>
+</html>
