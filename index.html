@@ -7,6 +7,7 @@
 <title>DPMC Security KTD Assessment Portal</title>
 
 <style>
+
 body{
     font-family: Arial, sans-serif;
     background:#f4f6f9;
@@ -15,7 +16,7 @@ body{
 }
 
 .container{
-    max-width:900px;
+    max-width:600px;
     margin:auto;
     background:white;
     padding:30px;
@@ -23,15 +24,40 @@ body{
     box-shadow:0 2px 10px rgba(0,0,0,.1);
 }
 
+.summary-card{
+    background:#003366;
+    color:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+.assessment-card{
+    background:white;
+    border-left:5px solid #003366;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:8px;
+    box-shadow:0 2px 5px rgba(0,0,0,.10);
+}
+
 h1{
     text-align:center;
     color:#003366;
+    margin-bottom:5px;
+}
+
+.portal-title{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+    font-weight:normal;
 }
 
 .subtitle{
     text-align:center;
     color:#666;
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
 input{
@@ -58,13 +84,16 @@ button:hover{
     background:#004c99;
 }
 
-.card{
-    margin-top:15px;
-    padding:15px;
-    border:1px solid #ddd;
-    border-radius:8px;
-    background:#fafafa;
+.pass{
+    color:green;
+    font-weight:bold;
 }
+
+.fail{
+    color:red;
+    font-weight:bold;
+}
+
 </style>
 
 </head>
@@ -73,7 +102,11 @@ button:hover{
 
 <div class="container">
 
-<h1>DPMC Security KTD Assessment Portal</h1>
+<h1>DPMC Security</h1>
+
+<h2 class="portal-title">
+Knowledge Transfer Day Assessment Portal
+</h2>
 
 <p class="subtitle">
 Enter your registered email address to view assessment results.
@@ -82,7 +115,7 @@ Enter your registered email address to view assessment results.
 <input
 type="email"
 id="email"
-placeholder="example@email.com">
+placeholder="Enter your registered email address">
 
 <button onclick="searchResults()">
 View Results
@@ -111,39 +144,85 @@ async function searchResults() {
 
     const data = await response.json();
 
-    let html = "";
-
     if (data.length === 0) {
 
-      html = "<h3>No assessment records found.</h3>";
+      document.getElementById("results").innerHTML =
+      "<h3>No assessment records found.</h3>";
 
-    } else {
-
-      data.forEach(item => {
-
-        html += `
-        <div class="card">
-
-          <h2>${item.assessment}</h2>
-
-          <p><strong>Name:</strong> ${item.name}</p>
-          <p><strong>Email:</strong> ${item.email}</p>
-          <p><strong>Property:</strong> ${item.property}</p>
-          <p><strong>Agency:</strong> ${item.agency}</p>
-          <p><strong>Score:</strong> ${item.score}</p>
-          <p><strong>Stage:</strong> ${item.stage}</p>
-          <p><strong>Status:</strong> ${item.status}</p>
-
-        </div>
-        `;
-
-      });
+      return;
 
     }
 
-    document.getElementById("results").innerHTML = html;
+    const name = data[0].name;
+    const emailAddress = data[0].email;
+    const property = data[0].property;
+    const agency = data[0].agency;
 
-  } catch (error) {
+    const passedCount = data.filter(item =>
+      item.status.toLowerCase().includes("pass")
+    ).length;
+
+    const failedCount = data.filter(item =>
+      item.status.toLowerCase().includes("fail")
+    ).length;
+
+    let html = `
+    <div class="summary-card">
+
+      <h2>Assessment Summary</h2>
+
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${emailAddress}</p>
+      <p><strong>Property:</strong> ${property}</p>
+      <p><strong>Agency:</strong> ${agency}</p>
+
+      <hr>
+
+      <p><strong>Total Assessments:</strong> ${data.length}</p>
+
+      <p style="color:#90EE90;">
+      <strong>Passed:</strong> ${passedCount}
+      </p>
+
+      <p style="color:#FFB6C1;">
+      <strong>Failed:</strong> ${failedCount}
+      </p>
+
+    </div>
+    `;
+
+    data.forEach(item => {
+
+      const statusClass =
+      item.status.toLowerCase().includes("pass")
+      ? "pass"
+      : "fail";
+
+      html += `
+      <div class="assessment-card">
+
+        <h3>${item.assessment}</h3>
+
+        <p><strong>Score:</strong> ${item.score}</p>
+
+        <p><strong>Stage:</strong> ${item.stage}</p>
+
+        <p>
+        <strong>Status:</strong>
+        <span class="${statusClass}">
+        ${item.status}
+        </span>
+        </p>
+
+      </div>
+      `;
+
+    });
+
+    document.getElementById("results").innerHTML =
+    html;
+
+  } catch(error) {
 
     console.error(error);
 
