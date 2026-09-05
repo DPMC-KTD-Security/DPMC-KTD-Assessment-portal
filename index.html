@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>DPMC Security KTD Assessment Portal</title>
 
 <style>
+
 body{
-    font-family: Arial, sans-serif;
+    font-family:Arial,sans-serif;
     background:#f4f6f9;
     margin:0;
     padding:30px;
@@ -21,23 +21,6 @@ body{
     padding:30px;
     border-radius:12px;
     box-shadow:0 2px 10px rgba(0,0,0,.1);
-}
-
-.summary-card{
-    background:#003366;
-    color:white;
-    padding:20px;
-    border-radius:10px;
-    margin-bottom:20px;
-}
-
-.assessment-card{
-    background:white;
-    border-left:5px solid #003366;
-    padding:15px;
-    margin-bottom:15px;
-    border-radius:8px;
-    box-shadow:0 2px 5px rgba(0,0,0,.10);
 }
 
 h1{
@@ -70,17 +53,7 @@ button{
     cursor:pointer;
 }
 
-.pass{
-    color:green;
-    font-weight:bold;
-}
-
-.fail{
-    color:red;
-    font-weight:bold;
-}
 </style>
-
 </head>
 
 <body>
@@ -102,102 +75,26 @@ placeholder="Enter your registered email address">
 View Results
 </button>
 
-<div id="results"></div>
-
 </div>
 
 <script>
 
-async function searchResults() {
+function searchResults(){
 
 const email =
 document.getElementById("email").value;
 
-try{
+if(!email){
 
-const response = await fetch(
-"https://script.google.com/macros/s/AKfycbzs-rKuvbQ1rkbHyzeZ1k1BpWO_X_phusbmdG2XBxd7DeKPbLkOHJUZV0SoDPFCXAkjRA/exec?email=" +
-encodeURIComponent(email)
-);
-
-const data = await response.json();
-
-if(data.length === 0){
-
-document.getElementById("results").innerHTML =
-"<h3>No assessment records found.</h3>";
+alert("Please enter your email address.");
 
 return;
-}
-
-const passedCount =
-data.filter(x =>
-x.status.toLowerCase().includes("pass")
-).length;
-
-const failedCount =
-data.filter(x =>
-x.status.toLowerCase().includes("fail")
-).length;
-
-let html = `
-
-<div class="summary-card">
-
-<h2>Assessment Summary</h2>
-
-<p><b>Name:</b> ${data[0].name}</p>
-<p><b>Email:</b> ${data[0].email}</p>
-<p><b>Property:</b> ${data[0].property}</p>
-<p><b>Agency:</b> ${data[0].agency}</p>
-
-<hr>
-
-<p><b>Total Assessments:</b> ${data.length}</p>
-<p><b>Passed:</b> ${passedCount}</p>
-<p><b>Failed:</b> ${failedCount}</p>
-
-</div>
-`;
-
-data.forEach(item=>{
-
-const statusClass =
-item.status.toLowerCase().includes("pass")
-? "pass"
-: "fail";
-
-html += `
-<div class="assessment-card">
-
-<h3>${item.assessment}</h3>
-
-<p><b>Score:</b> ${item.score}</p>
-<p><b>Stage:</b> ${item.stage}</p>
-
-<p>
-<b>Status:</b>
-<span class="${statusClass}">
-${item.status}
-</span>
-</p>
-
-</div>
-`;
-
-});
-
-document.getElementById("results").innerHTML =
-html;
-
-}catch(error){
-
-console.error(error);
-
-document.getElementById("results").innerHTML =
-"<p>Error loading assessment records.</p>";
 
 }
+
+window.location.href =
+"results.html?email=" +
+encodeURIComponent(email);
 
 }
 
