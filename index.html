@@ -193,29 +193,58 @@ async function searchResults() {
 
     data.forEach(item => {
 
-      const statusClass =
-      item.status.toLowerCase().includes("pass")
-      ? "pass"
-      : "fail";
+  html += `
+  <div class="assessment-card">
 
-      html += `
-      <div class="assessment-card">
+    <h3>${item.assessment}</h3>
 
-        <h3>${item.assessment}</h3>
+    <button onclick='showDetails(${JSON.stringify(item)})'>
+      View Details
+    </button>
 
-        <p><strong>Score:</strong> ${item.score}</p>
+  </div>
+  `;
 
-        <p><strong>Stage:</strong> ${item.stage}</p>
+});
 
-        <p>
-        <strong>Status:</strong>
-        <span class="${statusClass}">
-        ${item.status}
-        </span>
-        </p>
+document.getElementById("results").innerHTML = html;
 
-      </div>
-      `;
+} catch(error) {
+
+  console.error(error);
+
+  document.getElementById("results").innerHTML =
+  "<p>Error loading assessment records.</p>";
+
+}
+
+}
+
+function showDetails(item){
+
+alert(
+"Assessment: " + item.assessment + "\n\n" +
+"Name: " + item.name + "\n" +
+"Property: " + item.property + "\n" +
+"Agency: " + item.agency + "\n" +
+"Score: " + item.score + "\n" +
+"Status: " + item.status + "\n" +
+"Stage: " + item.stage
+);
+
+}
+
+     html += `
+<div class="assessment-card">
+
+  <h3>${item.assessment}</h3>
+
+  <button onclick='showDetails(${JSON.stringify(item)})'>
+    View Details
+  </button>
+
+</div>
+`;
 
     });
 
