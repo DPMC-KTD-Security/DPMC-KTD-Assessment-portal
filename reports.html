@@ -142,3 +142,61 @@ body{
 
         <div class="agency-item">
        
+<script>
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbxt7eLgH4ryxGiffBbNcZ61F0UYJ1JJrx_fbS21A5yH4ZSEhozcaEaQoli2Wbt2AxFb/exec";
+
+async function loadReports() {
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL + "?action=reports"
+            );
+
+        const data =
+            await response.json();
+
+        document.querySelector(".number")
+            .textContent = data.totalGuards;
+
+        let html = `
+            <div class="section-title">
+                Agency List
+            </div>
+        `;
+
+        data.agencies.forEach(agency => {
+
+            html += `
+                <div class="agency-item">
+
+                    <div class="agency-name">
+                        ${agency}
+                    </div>
+
+                    <div class="agency-status">
+                        Click to view properties
+                    </div>
+
+                </div>
+            `;
+
+        });
+
+        document.querySelector(".card")
+            .innerHTML = html;
+
+    } catch(error) {
+
+        console.error(error);
+
+    }
+
+}
+
+loadReports();
+
+</script>​‌
