@@ -53,6 +53,10 @@ button{
     cursor:pointer;
 }
 
+button:hover{
+    background:#00264d;
+}
+
 </style>
 </head>
 
@@ -60,41 +64,41 @@ button{
 
 <div class="container">
 
-<h1>DPMC Security</h1>
+    <h1>DPMC Security</h1>
 
-<h2 class="portal-title">
-Knowledge Transfer Day Assessment Portal
-</h2>
+    <h2 class="portal-title">
+        Knowledge Transfer Day Training Portal
+    </h2>
 
-<input
-type="email"
-id="email"
-placeholder="Enter your registered email address">
+    <input
+        type="email"
+        id="email"
+        placeholder="Enter your registered email address">
 
-<button onclick="searchResults()">
-View Results
-</button>
+    <button onclick="loginPortal()">
+        Access Training Portal
+    </button>
 
 </div>
 
 <script>
 
-function searchResults(){
+function loginPortal(){
 
-const email =
-document.getElementById("email").value;
+    const email =
+        document.getElementById("email").value.trim();
 
-if(!email){
+    if(!email){
 
-alert("Please enter your email address.");
+        alert("Please enter your email address.");
 
-return;
+        return;
 
-}
+    }
 
-window.location.href =
-"results.html?email=" +
-encodeURIComponent(email);
+    window.location.href =
+        "dashboard.html?email=" +
+        encodeURIComponent(email);
 
 }
 
