@@ -287,15 +287,21 @@ ${status}
                 Assigned Set: ${data.setInfo.set}
             </div>
 
-            <br>
-
-            <a
-                class="btn btn-primary"
-                href="${data.setInfo.formLink}"
-                target="_blank">
-                Start Assessment
-            </a>
-
+${
+status === 'OPEN'
+?
+`
+${data.setInfo.formLink}
+    Start Assessment
+</a>
+`
+:
+`
+<div class="btn btn-secondary">
+    Assessment Not Available
+</div>
+`
+}
         </div>
 
     `;
