@@ -76,9 +76,11 @@ body{
 }
 
 .agency-item{
+    display:block;
+    text-decoration:none;
+    color:inherit;
     padding:15px;
     border-bottom:1px solid #e5e7eb;
-    cursor:pointer;
     transition:.3s;
 }
 
@@ -146,45 +148,79 @@ body{
             Agency List
         </div>
 
-        <div class="agency-item">
-            <div class="agency-name">
-                ALCATRAZ
-            </div>
-            <div class="agency-status">
-                Click to view properties
-            </div>
-        </div>
+        ?agency=ALCATRAZ
+            <div class="agency-name">ALCATRAZ</div>
+            <div class="agency-status">Click to view properties</div>
+        </a>
 
-        <div class="agency-item">
-            <div class="agency-name">
-                AGLIPAY
-            </div>
-            <div class="agency-status">
-                Click to view properties
-            </div>
-        </div>
+        ?agency=AGLIPAY
+            <div class="agency-name">AGLIPAY</div>
+            <div class="agency-status">Click to view properties</div>
+        </a>
 
-        <div class="agency-item">
-            <div class="agency-name">
-                CONFEDERATE
-            </div>
-            <div class="agency-status">
-                Click to view properties
-            </div>
-        </div>
+        ?agency=CONFEDERATE
+            <div class="agency-name">CONFEDERATE</div>
+            <div class="agency-status">Click to view properties</div>
+        </a>
 
-        <div class="agency-item">
-            <div class="agency-name">
-                1983 SIC
-            </div>
-            <div class="agency-status">
-                Click to view properties
-            </div>
-        </div>
+        ?agency=1983SIC
+            <div class="agency-name">1983 SIC</div>
+            <div class="agency-status">Click to view properties</div>
+        </a>
 
     </div>
 
 </div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const agency = params.get("agency");
+
+if(agency){
+
+    document.querySelector(".container").innerHTML = `
+
+        <div class="card">
+
+            <div class="section-title">
+                ${agency}
+            </div>
+
+            <a class="agency-item" href="#">
+                <div class="agency-name">BWD</div>
+                <div class="agency-status">
+                    Click to view personnel
+                </div>
+            </a>
+
+            <a class="agency-item" href="#">
+                <div class="agency-name">PMR</div>
+                <div class="agency-status">
+                    Click to view personnel
+                </div>
+            </a>
+
+            <a class="agency-item" href="#">
+                <div class="agency-name">MAV</div>
+                <div class="agency-status">
+                    Click to view personnel
+                </div>
+            </a>
+
+            <br>
+
+            <a href="reports.html">
+                ← Back to Agencies
+            </a>
+
+        </div>
+
+    `;
+
+}
+
+</script>
 
 </body>
 </html>
