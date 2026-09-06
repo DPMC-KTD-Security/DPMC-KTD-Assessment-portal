@@ -156,6 +156,21 @@ fetch(apiUrl)
 
 .then(data => {
 
+    const now = new Date();
+
+const releaseDate = new Date(data.campaign.releaseDate);
+
+const dueDate = new Date(data.campaign.dueDate);
+
+let status = "OPEN";
+
+if(now < releaseDate){
+    status = "SCHEDULED";
+}
+else if(now > dueDate){
+    status = "CLOSED";
+}
+
     if(data.error){
 
         document.getElementById("content").innerHTML =
@@ -220,6 +235,13 @@ fetch(apiUrl)
             <div class="assessment-title">
                 ${data.assessment.assessmentName}
             </div>
+
+            <br>
+<div class="label">Status</div>
+<div class="value">
+${status}
+</div>​‌
+
 
             <div class="set-badge">
                 Assigned Set: ${data.setInfo.set}
