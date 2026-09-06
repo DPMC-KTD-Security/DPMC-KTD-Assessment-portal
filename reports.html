@@ -76,8 +76,16 @@ body{
 }
 
 .agency-item{
+    display:block;
+    text-decoration:none;
+    color:inherit;
     padding:15px;
     border-bottom:1px solid #e5e7eb;
+    transition:.3s;
+}
+
+.agency-item:hover{
+    background:#dcfce7;
 }
 
 .agency-name{
@@ -140,16 +148,48 @@ body{
             Agency List
         </div>
 
-        <div class="agency-item">
-       
+    </div>
+
+</div>
+
 <script>
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbxt7eLgH4ryxGiffBbNcZ61F0UYJ1JJrx_fbS21A5yH4ZSEhozcaEaQoli2Wbt2AxFb/exec";
 
-async function loadReports() {
+const params =
+new URLSearchParams(window.location.search);
 
-    try {
+const agency =
+params.get("agency");
+
+if(agency){
+
+    document.querySelector(".card").innerHTML = `
+        <div class="section-title">
+            ${agency}
+        </div>
+
+        <div class="agency-status">
+            Agency details coming soon
+        </div>
+
+        <br>
+
+        <a href="reports.html">
+            ← Back to Agencies
+        </a>
+    `;
+
+}else{
+
+    loadReports();
+
+}
+
+async function loadReports(){
+
+    try{
 
         const response =
             await fetch(
@@ -160,7 +200,8 @@ async function loadReports() {
             await response.json();
 
         document.querySelector(".number")
-            .textContent = data.totalGuards;
+            .textContent =
+            data.totalGuards;
 
         let html = `
             <div class="section-title">
@@ -171,7 +212,9 @@ async function loadReports() {
         data.agencies.forEach(agency => {
 
             html += `
-                <div class="agency-item">
+                <a
+                    class="agency-item"
+                    href="?agency=${encodeURIComponent(agency)}">
 
                     <div class="agency-name">
                         ${agency}
@@ -181,7 +224,7 @@ async function loadReports() {
                         Click to view properties
                     </div>
 
-                </div>
+                </a>
             `;
 
         });
@@ -189,7 +232,7 @@ async function loadReports() {
         document.querySelector(".card")
             .innerHTML = html;
 
-    } catch(error) {
+    }catch(error){
 
         console.error(error);
 
@@ -197,6 +240,7 @@ async function loadReports() {
 
 }
 
-loadReports();
+</script>
 
-</script>​‌
+</body>
+</html>
