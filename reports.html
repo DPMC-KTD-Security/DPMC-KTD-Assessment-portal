@@ -86,3 +86,89 @@ body{
     background:#f0fdf4;
 }
 
+.agency-name{
+    font-weight:bold;
+    font-size:16px;
+}
+
+.agency-status{
+    color:#666;
+    margin-top:5px;
+}
+
+@media(max-width:700px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>KTD Reports Dashboard</h1>
+    <p>Agency Compliance Monitoring</p>
+</div>
+
+<div class="container">
+
+    <div class="stats">
+
+        <div class="stat-card">
+            <div class="number">0</div>
+            <div class="label">Total Guards</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="number">0</div>
+            <div class="label">Completed</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="number">0</div>
+            <div class="label">Pending</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="number">0%</div>
+            <div class="label">Compliance Rate</div>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="section-title">
+            Agency List
+        </div>
+
+        <div class="agency-item">
+            <div class="agency-name">ALCATRAZ</div>
+            <div class="agency-status">Click to view properties</div>
+        </div>
+
+        <div class="agency-item">
+            <div class="agency-name">AGLIPAY</div>
+            <div class="agency-status">Click to view properties</div>
+        </div>
+
+        <div class="agency-item">
+            <div class="agency-name">CONFEDERATE</div>
+            <div class="agency-status">Click to view properties</div>
+        </div>
+
+        <div class="agency-item">
+            <div class="agency-name">1983 SIC</div>
+            <div class="agency-status">Click to view properties</div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
