@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KTD LMS Dashboard</title>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+    padding:30px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+h1{
+    margin-bottom:10px;
+}
+
+.card{
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    padding:20px;
+    border-radius:10px;
+    margin-top:20px;
+}
+
+.btn{
+    display:inline-block;
+    background:#2563eb;
+    color:white;
+    text-decoration:none;
+    padding:12px 20px;
+    border-radius:8px;
+    margin-top:15px;
+}
+
+.btn:hover{
+    background:#1d4ed8;
+}
+
+.label{
+    color:#6b7280;
+    font-size:14px;
+}
+
+.value{
+    font-size:18px;
+    font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>KTD LMS Dashboard</h1>
+
+    <div id="content">
+        Loading...
+    </div>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const email = params.get("email");
+
+const apiUrl =
+"https://script.google.com/macros/s/AKfycbxt7eLgH4ryxGiffBbNcZ61F0UYJ1JJrx_fbS21A5yH4ZSEhozcaEaQoli2Wbt2AxFb/exec?action=lms&email="
++ encodeURIComponent(email);
+
+fetch(apiUrl)
+.then(res => res.json())
+.then(data => {
+
+    if(data.error){
+
+        document.getElementById("content").innerHTML =
+        `<h3>${data.error}</h3>`;
+
+        return;
+    }
+
+    document.getElementById("content").innerHTML = `
+
+        <div class="card">
+
+            <div class="label">Guard Name</div>
+            <div class="value">${data.guard.name}</div>
+
+            <br>
+
+            <div class="label">Agency</div>
+            <div class="value">${data.guard.agency}</div>
+
+            <br>
+
+            <div class="label">Property</div>
+            <div class="value">${data.guard.property}</div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="label">Current Assessment</div>
+            <div class="value">
+                ${data.assessment.assessmentName}
+            </div>
+
+            <br>
+
+            <div class="label">Assigned Set</div>
+            <div class="value">
+                ${data.setInfo.set}
+            </div>
+
+            <a
+                class="btn"
+                href="${data.setInfo.formLink}"
+                target="_blank"
+            >
+                Start Assessment
+            </a>
+
+        </div>
+
+    `;
+
+})
+.catch(err => {
+
+    document.getElementById("content").innerHTML =
+    "Unable to load LMS data.";
+
+    console.error(err);
+
+});
+
+</script>
+
+</body>
+</html>
