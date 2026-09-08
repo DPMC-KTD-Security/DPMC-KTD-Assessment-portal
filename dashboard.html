@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Security Training Portal</title>
 
 <style>
@@ -16,27 +15,38 @@
 
 body{
     font-family:'Segoe UI',sans-serif;
-    background:#f4f6f9;
+    background:linear-gradient(
+        135deg,
+        #f8fafc,
+        #eef2f7,
+        #dbeafe
+    );
+    min-height:100vh;
 }
 
 .sidebar{
     position:fixed;
-    left:20px;
     top:20px;
-    bottom:20px;
-    width:260px;
+    left:20px;
+    width:250px;
+    height:calc(100vh - 40px);
+
     background:#0f172a;
-    color:white;
+
     border-radius:24px;
+
+    box-shadow:
+    0 25px 50px rgba(15,23,42,.25);
+
     padding:25px;
-    box-shadow:0 20px 50px rgba(0,0,0,.15);
 }
 
-.logo{
+.portal-title{
+    color:white;
     font-size:22px;
     font-weight:700;
-    margin-bottom:30px;
     line-height:1.4;
+    margin-bottom:35px;
 }
 
 .menu{
@@ -48,7 +58,7 @@ body{
 .menu a{
     text-decoration:none;
     color:white;
-    padding:14px;
+    padding:14px 16px;
     border-radius:12px;
     transition:.3s;
 }
@@ -70,7 +80,7 @@ body{
 }
 
 .main{
-    margin-left:320px;
+    margin-left:290px;
     padding:30px;
 }
 
@@ -81,45 +91,50 @@ body{
     margin-bottom:25px;
 }
 
-.user-card{
+.user-name{
     background:white;
-    padding:15px 20px;
-    border-radius:16px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    padding:12px 18px;
+    border-radius:14px;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+
     text-align:right;
 }
 
-.user-card h4{
+.user-name h3{
     color:#0f172a;
+    font-size:16px;
 }
 
-.user-card p{
+.user-name p{
     color:#64748b;
     font-size:13px;
 }
 
-.welcome-card{
+.card{
     background:white;
     border-radius:20px;
     padding:25px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    margin-bottom:20px;
-}
 
-.progress-container{
-    margin-top:15px;
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+
+    margin-bottom:20px;
 }
 
 .progress-bar{
     height:12px;
-    background:#e2e8f0;
+    background:#e5e7eb;
     border-radius:20px;
     overflow:hidden;
+    margin-top:15px;
 }
 
 .progress-fill{
     width:65%;
     height:100%;
+
     background:linear-gradient(
         90deg,
         #2563eb,
@@ -139,7 +154,9 @@ body{
     padding:22px;
     border-radius:20px;
     text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
 }
 
 .stat-card h2{
@@ -147,51 +164,22 @@ body{
     margin-bottom:10px;
 }
 
-.programs{
+.continue-card{
     background:white;
     border-radius:20px;
     padding:25px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
 
-.programs h2{
-    margin-bottom:20px;
-}
-
-.training-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-    gap:15px;
-}
-
-.training-card{
-    border:1px solid #e5e7eb;
-    border-radius:16px;
-    padding:20px;
-    transition:.3s;
-}
-
-.training-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 10px 20px rgba(0,0,0,.08);
-}
-
-.training-card h4{
-    color:#003366;
-    margin-bottom:10px;
-}
-
-.training-card p{
-    color:#64748b;
-    margin-bottom:15px;
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
 }
 
 .btn{
     display:inline-block;
-    padding:10px 15px;
+    margin-top:15px;
     background:#003366;
     color:white;
     text-decoration:none;
+    padding:12px 18px;
     border-radius:10px;
 }
 
@@ -199,7 +187,7 @@ body{
     background:#0055a5;
 }
 
-@media(max-width:1000px){
+@media(max-width:900px){
 
     .stats{
         grid-template-columns:1fr 1fr;
@@ -230,29 +218,34 @@ body{
 
 <div class="sidebar">
 
-    <div class="logo">
+    <div class="portal-title">
         Security Training Portal
     </div>
 
     <div class="menu">
 
-        <a href="#" class="active">
-            🏠       #
+        #
+            🏠 Dashboard
+        </a>
+
+        training-programs.html
             📚 Training Programs
         </a>
 
-        <a            📝 Assessments
+        assessments.html
+            📝 Assessments
         </a>
 
-        #
-            🏆 Certificates
+        <a href="certificates.html">
+ 🏆 Certificates
         </a>
 
     </div>
 
     <div class="bottom-menu">
 
-        <a href="#" style="color:mation
+        my-information.html
+            👤 My Information
         </a>
 
     </div>
@@ -268,28 +261,24 @@ body{
             <p>Continue your assigned training programs.</p>
         </div>
 
-        <div class="user-card">
-            <h4>Juan Dela Cruz</h4>
+        <div class="user-name">
+            <h3>Juan Dela Cruz</h3>
             <p>ABC Security Agency</p>
         </div>
 
     </div>
 
-    <div class="welcome-card">
+    <div class="card">
 
-        <h3>Overall Learning Progress</h3>
+        <h2>Overall Learning Progress</h2>
 
-        <div class="progress-container">
-
-            <div class="progress-bar">
-                <div class="progress-fill"></div>
-            </div>
-
-            <p style="margin-top:10px;">
-                65% Completed
-            </p>
-
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
         </div>
+
+        <p style="margin-top:10px;">
+            65% Completed
+        </p>
 
     </div>
 
@@ -317,55 +306,23 @@ body{
 
     </div>
 
-    <div class="programs">
+    <div class="continue-card">
 
-        <h2>📚 My Training Programs</h2>
+        <h2>Continue Learning</h2>
 
-        <div class="training-grid">
+        <p>
+            Resume your latest training module.
+        </p>
 
-            <div class="training-card">
-                <h4>Data Privacy</h4>
-                <p>Status: In Progress</p>
-                #Open Training</a>
-            </div>
+        <br>
 
-            <div class="training-card">
-                <h4>DMCI App</h4>
-                <p>Status: Not Started</p>
-                #Open Training</a>
-            </div>
+        <strong>Data Privacy</strong>
 
-            <div class="training-card">
-                <h4>Access Control</h4>
-                <p>Status: Completed</p>
-                #Review</a>
-            </div>
+        <br>
 
-            <div class="training-card">
-                <h4>Move In Procedure</h4>
-                <p>Status: Not Started</p>
-                #Open Training</a>
-            </div>
-
-            <div class="training-card">
-                <h4>Earthquake Preparedness</h4>
-                <p>Status: Not Started</p>
-                #Open Training</a>
-            </div>
-
-            <div class="training-card">
-                <h4>Visitor Management</h4>
-                <p>Status: Not Started</p>
-                #Open Training</a>
-            </div>
-
-            <div class="training-card">
-                <h4>Gate Pass & Work Permit</h4>
-                <p>Status: Not Started</p>
-                #Open Training</a>
-            </div>
-
-        </div>
+        training-programs.html
+            Resume Training
+        </a>
 
     </div>
 
