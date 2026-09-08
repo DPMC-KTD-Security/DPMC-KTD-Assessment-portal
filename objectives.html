@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DPMC-KTD Security Training Portal</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#0f172a,#1e3a5f);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:800px;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 20px 40px rgba(0,0,0,.2);
+}
+
+.logo{
+    text-align:center;
+    font-size:60px;
+    margin-bottom:15px;
+}
+
+h1{
+    text-align:center;
+    color:#003366;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:30px;
+    line-height:1.6;
+}
+
+.steps{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-bottom:30px;
+    flex-wrap:wrap;
+}
+
+.step{
+    background:#eef4ff;
+    color:#003366;
+    padding:10px 15px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.objectives{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.card{
+    background:#f8fafc;
+    border-left:4px solid #003366;
+    padding:15px;
+    border-radius:10px;
+}
+
+.card h3{
+    color:#003366;
+    margin-bottom:8px;
+    font-size:16px;
+}
+
+.card p{
+    color:#555;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.checkbox{
+    margin-bottom:20px;
+    font-size:15px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    background:#003366;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0055a5;
+}
+
+@media(max-width:768px){
+
+    .objectives{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">🛡️</div>
+
+    <h1>DPMC-KTD Security Training Portal</h1>
+
+    <p class="subtitle">
+        Welcome to the Security Training Portal.
+        Please review the training objectives before proceeding to your assigned learning modules.
+    </p>
+
+    <div class="steps">
+        <div class="step">✅ Login</div>
+        <div class="step">📖 Objectives</div>
+        <div class="step">📚 Learning</div>
+        <div class="step">📝 Assessment</div>
+    </div>
+
+    <div class="objectives">
+
+        <div class="card">
+            <h3>Security Awareness</h3>
+            <p>Enhance security awareness and professional knowledge.</p>
+        </div>
+
+        <div class="card">
+            <h3>Policy Compliance</h3>
+            <p>Strengthen compliance with company policies and procedures.</p>
+        </div>
+
+        <div class="card">
+            <h3>Operational Readiness</h3>
+            <p>Improve emergency response capabilities and readiness.</p>
+        </div>
+
+        <div class="card">
+            <h3>Professional Development</h3>
+            <p>Support continuous learning and skill enhancement.</p>
+        </div>
+
+        <div class="card">
+            <h3>Assessment Completion</h3>
+            <p>Successfully complete required assessments and training activities.</p>
+        </div>
+
+        <div class="card">
+            <h3>Certification</h3>
+            <p>Earn certifications upon successful completion of assigned training.</p>
+        </div>
+
+    </div>
+
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" id="agree">
+            I have read and understood the training objectives.
+        </label>
+    </div>
+
+    <button onclick="proceedPortal()">
+        Start Learning
+    </button>
+
+</div>
+
+<script>
+
+function proceedPortal(){
+
+    const agree=document.getElementById("agree");
+
+    if(!agree.checked){
+
+        alert("Please confirm that you have read the training objectives.");
+
+        return;
+    }
+
+    window.location.href="dashboard.html";
+}
+
+</script>
+
+</body>
+</html>
