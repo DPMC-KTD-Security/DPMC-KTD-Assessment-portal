@@ -3,58 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DPMC Security KTD Assessment Portal</title>
+
+<title>DPMC-KTD Security Training Portal</title>
 
 <style>
 
-body{
-    font-family:Arial,sans-serif;
-    background:#f4f6f9;
+*{
     margin:0;
-    padding:30px;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#0f172a,#1e3a5f);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
 }
 
 .container{
-    max-width:600px;
-    margin:auto;
+    width:100%;
+    max-width:500px;
     background:white;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:0 2px 10px rgba(0,0,0,.1);
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+.logo{
+    width:80px;
+    height:80px;
+    background:#003366;
+    color:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:35px;
+    margin:0 auto 20px;
 }
 
 h1{
-    text-align:center;
     color:#003366;
+    margin-bottom:10px;
 }
 
-.portal-title{
-    text-align:center;
+.subtitle{
     color:#666;
-    font-weight:normal;
+    margin-bottom:10px;
+}
+
+.description{
+    color:#777;
+    font-size:14px;
+    line-height:1.6;
+    margin-bottom:25px;
 }
 
 input{
     width:100%;
-    padding:12px;
-    border:1px solid #ccc;
-    border-radius:5px;
-    margin-bottom:10px;
-    box-sizing:border-box;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    margin-bottom:15px;
+    font-size:15px;
+}
+
+input:focus{
+    outline:none;
+    border-color:#003366;
 }
 
 button{
     width:100%;
-    padding:12px;
+    padding:14px;
     background:#003366;
     color:white;
     border:none;
-    border-radius:5px;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:bold;
     cursor:pointer;
 }
 
 button:hover{
-    background:#00264d;
+    background:#0055a5;
+}
+
+.footer{
+    margin-top:20px;
+    font-size:12px;
+    color:#888;
 }
 
 </style>
@@ -64,11 +107,18 @@ button:hover{
 
 <div class="container">
 
-    <h1>DPMC Security</h1>
+    <div class="logo">🛡️</div>
 
-    <h2 class="portal-title">
-        Knowledge Transfer Day Training Portal
-    </h2>
+    <h1>DPMC-KTD</h1>
+
+    <p class="subtitle">
+        Security Training Portal
+    </p>
+
+    <p class="description">
+        Access your assigned training modules,
+        learning materials, assessments, and certifications.
+    </p>
 
     <input
         type="email"
@@ -76,8 +126,12 @@ button:hover{
         placeholder="Enter your registered email address">
 
     <button onclick="loginPortal()">
-        Access Training Portal
+        Continue
     </button>
+
+    <div class="footer">
+        Learning • Compliance • Development
+    </div>
 
 </div>
 
@@ -89,17 +143,13 @@ function loginPortal(){
         document.getElementById("email").value.trim();
 
     if(!email){
-
         alert("Please enter your email address.");
-
         return;
-
     }
 
     window.location.href =
-        "dashboard.html?email=" +
+        "objectives.html?email=" +
         encodeURIComponent(email);
-
 }
 
 </script>
