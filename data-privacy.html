@@ -199,15 +199,20 @@ security personnel must exercise professionalism and discretion at all times.
 
 <div class="acknowledgement">
 
-<p>
-☑ I have reviewed and understood the contents of this learning module.
-</p>
+<label>
+    <input type="checkbox" id="ackCheck">
+    I have reviewed and understood the contents of this learning module.
+</label>
+
+<br><br>
 
 <a href="https://forms.cloud.microsoft/r/7HhY9n0vwM"
    class="assessment-btn"
-   target="_blank">
+   id="assessmentBtn"
+   target="_blank"
+   style="pointer-events:none;opacity:0.5;">
 
-    Proceed To Assessment →
+   Proceed to Assessment →
 
 </a>
 
@@ -216,6 +221,26 @@ security personnel must exercise professionalism and discretion at all times.
 </div>
 
 </div>
+<script>
 
+document.getElementById("ackCheck").addEventListener("change", function() {
+
+    const btn = document.getElementById("assessmentBtn");
+
+    if(this.checked){
+
+        btn.style.pointerEvents = "auto";
+        btn.style.opacity = "1";
+
+    }else{
+
+        btn.style.pointerEvents = "none";
+        btn.style.opacity = "0.5";
+
+    }
+
+});
+
+</script>
 </body>
 </html>
