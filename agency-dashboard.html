@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Agency Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(
+        135deg,
+        #f8fafc 0%,
+        #eef2f7 50%,
+        #dbeafe 100%
+    );
+    min-height:100vh;
+}
+
+.main{
+    padding:35px;
+}
+
+.welcome{
+    margin-bottom:25px;
+}
+
+.welcome h1{
+    font-size:40px;
+    color:#0f172a;
+}
+
+.agency-name{
+    margin-top:8px;
+    font-size:22px;
+    font-weight:600;
+    color:#2563eb;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.card{
+    background:white;
+    border-radius:22px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+}
+
+.card h2{
+    margin-bottom:15px;
+    color:#0f172a;
+}
+
+.card-number{
+    font-size:40px;
+    font-weight:700;
+    color:#2563eb;
+}
+
+.button{
+    display:inline-block;
+    text-decoration:none;
+    background:#003366;
+    color:white;
+    padding:12px 18px;
+    border-radius:12px;
+    margin-right:10px;
+    margin-top:10px;
+}
+
+.button:hover{
+    background:#0055a5;
+}
+
+@media(max-width:1000px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="main">
+
+    <div class="welcome">
+
+        <h1>Welcome Back!</h1>
+
+        <div class="agency-name">
+            SAMPLE ONLY
+        </div>
+
+    </div>
+
+    <div class="stats">
+
+        <div class="card">
+
+            <h2>📞 Radio Call Compliance</h2>
+
+            <div class="card-number">
+                96%
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>📍 SNAP Compliance</h2>
+
+            <div class="card-number">
+                94%
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>📝 DSR Compliance</h2>
+
+            <div class="card-number">
+                92%
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="stats">
+
+        <div class="card">
+
+            <h2>👮 Personnel</h2>
+
+            <div class="card-number">
+                152
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>✅ Assessment Compliance</h2>
+
+            <div class="card-number">
+                95%
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>🏢 Active Properties</h2>
+
+            <div class="card-number">
+                12
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+    <h2>⚡ Quick Access</h2>
+
+    <a href="agency-personnel.html" class="button">
+        👮 Personnel
+    </a>
+
+    <a href="agency-reports.html" class="button">
+        📊 Reports
+    </a>
+
+    <a href="agency-results.html" class="button">
+        📝 Assessment Results
+    </a>
+
+</div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
