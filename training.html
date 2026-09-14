@@ -11,11 +11,75 @@ body{
     font-family:'Segoe UI',sans-serif;
     background:#f8fafc;
     padding:40px;
+    color:#1e293b;
 }
 
 .container{
     max-width:1000px;
     margin:auto;
+}
+
+.hero{
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #60a5fa
+    );
+    color:white;
+    padding:30px;
+    border-radius:20px;
+    margin-bottom:25px;
+    box-shadow:0 10px 25px rgba(37,99,235,.25);
+}
+
+.hero h1{
+    margin-bottom:10px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.stat-card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.stat-card h2{
+    color:#2563eb;
+    margin-bottom:5px;
+}
+
+.progress-section{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.progress-bar{
+    height:15px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.progress-fill{
+    width:20%;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        #2563eb,
+        #60a5fa
+    );
 }
 
 .card{
@@ -26,14 +90,43 @@ body{
     box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
+.module-tag{
+    display:inline-block;
+    background:#dbeafe;
+    color:#1d4ed8;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:10px;
+}
+
+.status{
+    display:inline-block;
+    background:#fef3c7;
+    color:#92400e;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+    margin-top:10px;
+}
+
+.time{
+    color:#64748b;
+    font-size:14px;
+    margin-top:10px;
+}
+
 .btn{
     display:inline-block;
-    margin-top:10px;
+    margin-top:15px;
     text-decoration:none;
     background:#2563eb;
     color:white;
     padding:10px 15px;
     border-radius:10px;
+    font-weight:600;
 }
 
 .btn:hover{
@@ -46,10 +139,6 @@ body{
     font-weight:600;
 }
 
-h1{
-    margin-bottom:10px;
-}
-
 </style>
 
 </head>
@@ -58,17 +147,68 @@ h1{
 
 <div class="container">
 
-<h1>📚 Training Programs</h1>
+<div class="hero">
 
-<p>Select a training module below:</p>
+    <h1>📚 Training Programs</h1>
+
+    <p>
+        Welcome to the DPMC Learning Portal.
+        Complete all required training modules and assessments
+        to improve your knowledge, compliance, and operational readiness.
+    </p>
+
+</div>
+
+<div class="stats">
+
+    <div class="stat-card">
+        <h2>1</h2>
+        <p>Modules Available</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>0</h2>
+        <p>Completed</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>1</h2>
+        <p>Pending</p>
+    </div>
+
+</div>
+
+<div class="progress-section">
+
+    <strong>Learning Progress</strong>
+
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+
+    <p>0% Completed</p>
+
+</div>
 
 <div class="card">
 
-    <h3>📚 Data Privacy Awareness</h3>  
+    <div class="module-tag">
+        MODULE 1
+    </div>
 
-    <p>
-        Republic Act No. 10173 (Data Privacy Act of 2012)
+    <h3>📚 Data Privacy Awareness</h3>
+
+    <div class="status">
+        🟡 Not Started
+    </div>
+
+    <p style="margin-top:15px;">
+        Learn the importance of protecting personal information and understand the responsibilities of security personnel under Republic Act No. 10173 (Data Privacy Act of 2012).
     </p>
+
+    <div class="time">
+        ⏱ Estimated Reading Time: 5 Minutes
+    </div>
 
     <a href="data-privacy.html" class="btn">
         Open Module
