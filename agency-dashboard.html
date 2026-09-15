@@ -205,7 +205,7 @@ const agency = "AGLIPAY";
 
 const apiUrl =
 "https://script.google.com/macros/s/AKfycbxt7eLgH4ryxGiffBbNcZ61F0UYJ1JJrx_fbS21A5yH4ZSEhozcaEaQoli2Wbt2AxFb/exec";
-
+    
 fetch(
 `${apiUrl}?action=agency&agency=${encodeURIComponent(agency)}`
 )
@@ -231,11 +231,15 @@ fetch(
 fetch(
 `${apiUrl}?action=topics&agency=${encodeURIComponent(agency)}`
 )
-.then(response => response.json())
+.then(response => response.text())
 .then(data => {
 
+    console.log("TOPICS API:", data);
+
+    const topics = JSON.parse(data);
+
     document.getElementById("topicCount").innerText =
-        data.length;
+        topics.length;
 
 })
 .catch(error => {
