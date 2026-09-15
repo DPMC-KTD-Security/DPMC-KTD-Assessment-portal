@@ -118,25 +118,46 @@ td{
 }
 
 .summary{
-    display:flex;
-    gap:15px;
-    margin-bottom:20px;
-    flex-wrap:wrap;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    margin:25px 0;
+    padding:20px 0;
+    border-top:1px solid #e2e8f0;
+    border-bottom:1px solid #e2e8f0;
 }
 
-.summary-card{
-    background:#f8fafc;
-    padding:15px;
-    border-radius:12px;
-    min-width:140px;
+.summary-item{
+    text-align:center;
 }
 
 .summary-number{
-    font-size:26px;
-    font-weight:700;
+    font-size:42px;
+    font-weight:800;
+    color:#003366;
+    line-height:1;
+}
+
+.summary-number.passed{
+    color:#16a34a;
+}
+
+.summary-number.failed{
+    color:#dc2626;
+}
+
+.summary-number.compliance{
     color:#2563eb;
 }
 
+.summary-label{
+    margin-top:8px;
+    font-size:13px;
+    font-weight:600;
+    color:#64748b;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+}
 .attempt-btn{
     border:none;
     background:#2563eb;
@@ -405,32 +426,43 @@ let html = `
 
 <div class="summary">
 
-    <div class="summary-card">
-        Compliance
-        <div class="summary-number">
-            ${data.compliance}%
-        </div>
-    </div>
-
-    <div class="summary-card">
-        Passed
-        <div class="summary-number">
-            ${data.passed}
-        </div>
-    </div>
-
-    <div class="summary-card">
-        Failed
-        <div class="summary-number">
-            ${data.failed}
-        </div>
-    </div>
-
-    <div class="summary-card">
-        Personnel
+    <div class="summary-item">
         <div class="summary-number">
             ${data.personnel.length}
         </div>
+        <div class="summary-label">
+            Personnel
+        </div>
+    </div>
+
+    <div class="summary-item">
+        <div class="summary-number passed">
+            ${data.passed}
+        </div>
+        <div class="summary-label">
+            Passed
+        </div>
+    </div>
+
+    <div class="summary-item">
+        <div class="summary-number failed">
+            ${data.failed}
+        </div>
+        <div class="summary-label">
+            Failed
+        </div>
+    </div>
+
+    <div class="summary-item">
+        <div class="summary-number compliance">
+            ${data.compliance}%
+        </div>
+        <div class="summary-label">
+            Compliance
+        </div>
+    </div>
+
+</div>
     </div>
 
 </div>
