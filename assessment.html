@@ -89,6 +89,10 @@ body{
     color:#64748b;
 }
 
+.topic-link{
+    text-decoration:none;
+}
+
 </style>
 
 </head>
@@ -114,7 +118,7 @@ body{
 
     </div>
 
-    <a herf= "agency-dashboard.html" class="back-btn">
+    <a href="agency-dashboard.html" class="back-btn">
         ← Back to Dashboard
     </a>
 
@@ -145,18 +149,24 @@ fetch(
     data.forEach(topic => {
 
         container.innerHTML += `
-        
-        <div class="topic-card">
 
-            <div class="topic-title">
-                ${topic.topic}
-            </div>
+<a
+href="properties.html?topic=${encodeURIComponent(topic.topic)}"
+class="topic-link">
 
-            <div class="topic-records">
-                ${topic.totalRecords} Records
-            </div>
+    <div class="topic-card">
 
+        <div class="topic-title">
+            ${topic.topic}
         </div>
+
+        <div class="topic-records">
+            ${topic.totalRecords} Records
+        </div>
+
+    </div>
+
+</a>
 
         `;
 
