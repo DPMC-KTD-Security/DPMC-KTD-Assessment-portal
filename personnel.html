@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Personnel</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#f5f7fb;
+}
+
+.container{
+    padding:35px;
+}
+
+.header{
+    margin-bottom:30px;
+}
+
+.header h1{
+    font-size:38px;
+    color:#0f172a;
+}
+
+.header p{
+    color:#64748b;
+    margin-top:8px;
+    font-size:18px;
+}
+
+.summary{
+    display:flex;
+    gap:20px;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+    min-width:180px;
+}
+
+.card h3{
+    color:#64748b;
+    margin-bottom:8px;
+}
+
+.card-value{
+    font-size:28px;
+    font-weight:700;
+    color:#2563eb;
+}
+
+.table-container{
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#003366;
+    color:white;
+    padding:14px;
+    text-align:left;
+}
+
+td{
+    padding:14px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+tr:hover{
+    background:#f8fafc;
+}
+
+.passed{
+    color:#16a34a;
+    font-weight:700;
+}
+
+.failed{
+    color:#dc2626;
+    font-weight:700;
+}
+
+.back-btn{
+    display:inline-block;
+    margin-top:25px;
+    text-decoration:none;
+    background:#003366;
+    color:white;
+    padding:12px 18px;
+    border-radius:12px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1 id="topicTitle">
+            Loading...
+        </h1>
+
+        <p id="propertyTitle">
+            Loading...
+        </p>
+
+    </div>
+
+    <div class="summary">
+
+        <div class="card">
+
+            <h3>Personnel</h3>
+
+            <div
+                class="card-value"
+                id="personnelCount">
+
+                0
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Name</th>
+
+                    <th>Email</th>
+
+                    <th>Score</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="personnelTable">
+
+                <tr>
+                    <td colspan="4">
+                        Loading...
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    javascript:history.back()
+
+        ← Back
+
+    </a>
+
+</div>
+
+<script>
+
+const apiUrl =
+"https://script.google.com/macros/s/AKfycbxt7eLgH4ryxGiffBbNcZ61F0UYJ1JJrx_fbS21A5yH4ZSEhozcaEaQoli2Wbt2AxFb/exec";
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const agency =
+params.get("agency");
+
+const topic =
+params.get("topic");
+
+const property =
+params.get("property");
+
+document
+.getElementById("topicTitle")
+.innerText = topic;
+
+document
+.getElementById("propertyTitle")
+.innerText = "Property: " + property;
+
+fetch(
+`${apiUrl}?action=personnel&agency=${encodeURIComponent(agency)}&topic=${encodeURIComponent(topic)}&property=${encodeURIComponent(property)}`
+)
+
+.then(response => response.json())
+
+.then(data => {
+
+    document
+    .getElementById(
+        "personnelCount"
+    )
+    .innerText =
+    data.length;
+
+    const table =
+    document
+    .getElementById(
+        "personnelTable"
+    );
+
+    table.innerHTML = "";
+
+    data.forEach(person => {
+
+        const statusClass =
+        person.status
+        .toLowerCase()
+        .includes("pass")
+        ? "passed"
+        : "failed";
+
+        table.innerHTML += `
+
+<tr>
+
+    <td>${person.name}</td>
+
+    <td>${person.email}</td>
+
+    <td>${person.score}/10</td>
+
+    <td class="${statusClass}">
+        ${person.status}
+    </td>
+
+</tr>
+
+        `;
+
+    });
+
+})
+
+.catch(error => {
+
+    console.error(error);
+
+});
+
+</script>
+
+</body>
+</html>
