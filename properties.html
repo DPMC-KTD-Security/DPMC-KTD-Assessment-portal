@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Properties</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#f5f7fb;
+}
+
+.container{
+    padding:35px;
+}
+
+.header{
+    margin-bottom:30px;
+}
+
+.header h1{
+    font-size:40px;
+    color:#0f172a;
+}
+
+.properties{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    gap:20px;
+}
+
+.property-card{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+    transition:.2s;
+}
+
+.property-card:hover{
+    transform:translateY(-5px);
+}
+
+.property-name{
+    font-size:24px;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.property-records{
+    margin-top:10px;
+    color:#2563eb;
+    font-weight:600;
+}
+
+.property-link{
+    text-decoration:none;
+}
+
+.back-btn{
+    display:inline-block;
+    margin-top:30px;
+    text-decoration:none;
+    background:#003366;
+    color:white;
+    padding:12px 18px;
+    border-radius:12px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1 id="topicTitle">
+            Loading...
+        </h1>
+
+    </div>
+
+    <div
+        class="properties"
+        id="propertiesContainer">
+
+        Loading...
+
+    </div>
+
+    <a
+        href="assessment.html"
+        class="back-btn">
+
+        ← Back to Topics
+
+    </a>
+
+</div>
+
+<script>
+
+const agency = "AGLIPAY";
+
+const apiUrl =
+"https://script.google.com/macros/s/AKfycbxt7eLgH4ryxGiffBbNcZ61F0UYJ1JJrx_fbS21A5yH4ZSEhozcaEaQoli2Wbt2AxFb/exec";
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const topic =
+params.get("topic");
+
+document
+.getElementById("topicTitle")
+.innerText = topic;
+
+fetch(
+`${apiUrl}?action=properties&agency=${encodeURIComponent(agency)}&topic=${encodeURIComponent(topic)}`
+)
+
+.then(response => response.json())
+
+.then(data => {
+
+    const container =
+    document.getElementById(
+        "propertiesContainer"
+    );
+
+    container.innerHTML = "";
+
+    data.forEach(property => {
+
+        container.innerHTML += `
+
+<a
+href="personnel.html?topic=${encodeURIComponent(topic)}&property=${encodeURIComponent(property.property)}"
+class="property-link">
+
+<div class="property-card">
+
+    <div class="property-name">
+
+        ${property.property}
+
+    </div>
+
+    <div class="property-records">
+
+        ${property.records} Records
+
+    </div>
+
+</div>
+
+</a>
+
+        `;
+
+    });
+
+})
+
+.catch(error => {
+
+    console.error(error);
+
+});
+
+</script>
+
+</body>
+</html>
