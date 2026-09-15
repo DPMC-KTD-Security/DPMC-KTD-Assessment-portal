@@ -192,6 +192,8 @@ tr:hover{
 
                     <th>Status</th>
 
+                    <th>Attempts</th>
+
                 </tr>
 
             </thead>
@@ -199,7 +201,7 @@ tr:hover{
             <tbody id="personnelTable">
 
                 <tr>
-                    <td colspan="4">
+                    <td colspan="5">
                         Loading...
                     </td>
                 </tr>
@@ -291,13 +293,32 @@ fetch(
 
     <td>${person.name}</td>
 
-    <td>${person.email}</td>
+<td>${person.email}</td>
 
-    <td>${person.score}/10</td>
+<td>${person.latestScore}/10</td>
 
-    <td class="${statusClass}">
-        ${person.status}
-    </td>
+<td class="${statusClass}">
+    ${person.status}
+</td>
+
+<td>
+
+    <button
+        onclick="showHistory('${person.email}')"
+        style="
+            border:none;
+            background:#2563eb;
+            color:white;
+            padding:6px 10px;
+            border-radius:8px;
+            cursor:pointer;
+        ">
+
+        ${person.attempts}
+
+    </button>
+
+</td>
 
 </tr>
 
@@ -312,7 +333,14 @@ fetch(
     console.error(error);
 
 });
+function showHistory(email){
 
+    alert(
+        "Assessment History\n\n" +
+        email
+    );
+
+}
 </script>
 
 </body>
