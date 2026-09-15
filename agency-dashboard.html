@@ -105,8 +105,8 @@ body{
 
         <h1>Welcome Back!</h1>
 
-        <div class="agency-name">
-            SAMPLE ONLY
+        <div class="agency-name" id="agencyName">
+            Loading...
         </div>
 
     </div>
@@ -151,18 +151,18 @@ body{
 
             <h2>👮 Personnel</h2>
 
-            <div class="card-number">
-                152
+            <div class="card-number" id="personnelCount">
+                Loading...
             </div>
 
         </div>
 
         <div class="card">
 
-            <h2>✅ Assessment Compliance</h2>
+            <h2>📚 Assessment Topics</h2>
 
-            <div class="card-number">
-                95%
+            <div class="card-number" id="topicCount">
+                Loading...
             </div>
 
         </div>
@@ -171,8 +171,8 @@ body{
 
             <h2>🏢 Active Properties</h2>
 
-            <div class="card-number">
-                12
+            <div class="card-number" id="propertyCount">
+                Loading...
             </div>
 
         </div>
@@ -181,25 +181,70 @@ body{
 
     <div class="card">
 
-    <h2>⚡ Quick Access</h2>
+        <h2>⚡ Quick Access</h2>
 
-    <a href="agency-personnel.html" class="button">
-        👮 Personnel
-    </a>
+        <a href="agency-personnel.html" class="button">
+            👮 Personnel
+        </a>
 
-    <a href="agency-reports.html" class="button">
-        📊 Reports
-    </a>
+        <a href="agency-reports.html" class="button">
+            📊 Reports
+        </a>
 
-    <a href="agency-results.html" class="button">
-        📝 Assessment Results
-    </a>
-
-</div>
+        <a href="agency-results.html" class="button">
+            📝 Assessment Results
+        </a>
 
     </div>
 
 </div>
+
+<script>
+
+const agency = "AGLIPAY";
+
+const apiUrl =
+"https://script.google.com/macros/s/AKfycbxt7eLgH4ryxGiffBbNcZ61F0UYJ1JJrx_fbS21A5yH4ZSEhozcaEaQoli2Wbt2AxFb/exec";
+
+fetch(
+`${apiUrl}?action=agency&agency=${encodeURIComponent(agency)}`
+)
+.then(response => response.json())
+.then(data => {
+
+    document.getElementById("agencyName").innerText =
+        data.agency;
+
+    document.getElementById("personnelCount").innerText =
+        data.personnel;
+
+    document.getElementById("propertyCount").innerText =
+        data.properties;
+
+})
+.catch(error => {
+
+    console.error(error);
+
+});
+
+fetch(
+`${apiUrl}?action=topics&agency=${encodeURIComponent(agency)}`
+)
+.then(response => response.json())
+.then(data => {
+
+    document.getElementById("topicCount").innerText =
+        data.length;
+
+})
+.catch(error => {
+
+    console.error(error);
+
+});
+
+</script>
 
 </body>
 </html>
