@@ -122,15 +122,41 @@ tr:hover{
 
     <div class="header">
 
-        <h1 id="topicTitle">
-            Loading...
-        </h1>
+    <div style="margin-bottom:15px;color:#64748b;">
 
-        <p id="propertyTitle">
+        <a href="agency-dashboard.html">
+            🏠 Dashboard
+        </a>
+
+        >
+
+        <a href="assessment.html">
+            📚 Assessment Results
+        </a>
+
+        >
+
+        <span id="breadcrumbTopic">
             Loading...
-        </p>
+        </span>
+
+        >
+
+        <span id="breadcrumbProperty">
+            Loading...
+        </span>
 
     </div>
+
+    <h1 id="topicTitle">
+        Loading...
+    </h1>
+
+    <p id="propertyTitle">
+        Loading...
+    </p>
+
+</div>
 
     <div class="summary">
 
@@ -184,7 +210,7 @@ tr:hover{
 
     </div>
 
-    javascript:history.back()
+    <a href="javascript:history.back()" class=back-btn>
 
         ← Back
 
@@ -218,6 +244,14 @@ document
 document
 .getElementById("propertyTitle")
 .innerText = "Property: " + property;
+
+document
+.getElementById("breadcrumbTopic")
+.innerText = topic;
+
+document
+.getElementById("breadcrumbProperty")
+.innerText = property;
 
 fetch(
 `${apiUrl}?action=personnel&agency=${encodeURIComponent(agency)}&topic=${encodeURIComponent(topic)}&property=${encodeURIComponent(property)}`
