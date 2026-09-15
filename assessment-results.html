@@ -146,6 +146,37 @@ td{
     cursor:pointer;
 }
 
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:9999;
+}
+
+.modal-content{
+    background:white;
+    width:500px;
+    max-width:90%;
+    margin:80px auto;
+    padding:25px;
+    border-radius:16px;
+}
+
+.close-modal{
+    float:right;
+    font-size:30px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.history-item{
+    padding:12px;
+    margin-top:10px;
+    background:#f8fafc;
+    border-radius:10px;
+}
+    
 </style>
 
 </head>
@@ -290,14 +321,49 @@ function loadProperties(
             div.innerText =
             property.property;
 
-            div.onclick = () => {
+            title.onclick = () => {
 
-                loadPersonnel(
-                    topic,
-                    property.property
-                );
+    const isOpen =
+        propertyList.style.display === "block";
 
-            };
+    document
+    .querySelectorAll(".property-list")
+    .forEach(list => {
+
+        list.style.display = "none";
+
+    });
+
+    document
+    .querySelectorAll(".topic-title")
+    .forEach(item => {
+
+        item.innerHTML =
+        item.innerHTML.replace("▼","▶");
+
+    });
+
+    if(isOpen){
+
+        title.innerHTML =
+        `▶ ${topic.topic}`;
+
+        return;
+
+    }
+
+    propertyList.style.display =
+    "block";
+
+    title.innerHTML =
+    `▼ ${topic.topic}`;
+
+    loadProperties(
+        topic.topic,
+        propertyList
+    );
+
+};
 
             container.appendChild(div);
 
@@ -426,15 +492,71 @@ fetch(
 
 function showHistory(email){
 
-    alert(
-        "Assessment History\n\n" +
-        email +
-        "\n\nHistory popup next step."
+    const modal =
+    document.getElementById(
+        "historyModal"
     );
+
+    const content =
+    document.getElementById(
+        "historyContent"
+    );
+
+    content.innerHTML = `
+
+        <h2>
+            Assessment History
+        </h2>
+
+        <br>
+
+        <p>${email}</p>
+
+        <div class="history-item">
+
+            Attempt #1
+
+            <br>
+
+            Score: 5/10
+
+            <br>
+
+            ❌ Failed
+
+        </div>
+
+        <div class="history-item">
+
+            Attempt #2
+
+            <br>
+
+            Score: 9/10
+
+            <br>
+
+            ✅ Passed
+
+        </div>
+
+    `;
+
+    modal.style.display =
+    "block";
 
 }
 
-</script>
+function closeHistory(){
 
+    document
+    .getElementById(
+        "historyModal"
+    )
+    .style.display =
+    "none";
+
+}
+    
 </body>
 </html>
