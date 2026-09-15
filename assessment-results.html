@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Assessment Results</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#f5f7fb;
+}
+
+.container{
+    padding:25px;
+}
+
+.header{
+    margin-bottom:20px;
+}
+
+.header h1{
+    font-size:36px;
+    color:#0f172a;
+}
+
+.layout{
+    display:flex;
+    gap:20px;
+    height:calc(100vh - 140px);
+}
+
+.sidebar{
+    width:320px;
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    overflow:auto;
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+}
+
+.content{
+    flex:1;
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    overflow:auto;
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+}
+
+.topic{
+    margin-bottom:10px;
+}
+
+.topic-title{
+    padding:12px;
+    background:#f1f5f9;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.topic-title:hover{
+    background:#dbeafe;
+}
+
+.property-list{
+    display:none;
+    margin-top:8px;
+    margin-left:15px;
+}
+
+.property-item{
+    padding:10px;
+    cursor:pointer;
+    border-radius:8px;
+    margin-bottom:5px;
+}
+
+.property-item:hover{
+    background:#eff6ff;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+th{
+    background:#003366;
+    color:white;
+    padding:12px;
+    text-align:left;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.passed{
+    color:#16a34a;
+    font-weight:700;
+}
+
+.failed{
+    color:#dc2626;
+    font-weight:700;
+}
+
+.summary{
+    display:flex;
+    gap:15px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+.summary-card{
+    background:#f8fafc;
+    padding:15px;
+    border-radius:12px;
+    min-width:140px;
+}
+
+.summary-number{
+    font-size:26px;
+    font-weight:700;
+    color:#2563eb;
+}
+
+.attempt-btn{
+    border:none;
+    background:#2563eb;
+    color:white;
+    padding:6px 10px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>📚 Assessment Results</h1>
+
+    </div>
+
+    <div class="layout">
+
+        <div class="sidebar" id="sidebar">
+
+            Loading...
+
+        </div>
+
+        <div class="content" id="content">
+
+            <h2>Select a property</h2>
+
+            <p>
+                Choose a topic and property from the left panel.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const agency = "AGLIPAY";
+
+const apiUrl =
+"https://script.google.com/macros/s/AKfycbxt7eLgH4ryxGiffBbNcZ61F0UYJ1JJrx_fbS21A5yH4ZSEhozcaEaQoli2Wbt2AxFb/exec";
+
+loadTopics();
+
+function loadTopics(){
+
+    fetch(
+        `${apiUrl}?action=topics&agency=${encodeURIComponent(agency)}`
+    )
+
+    .then(response => response.json())
+
+    .then(topics => {
+
+        const sidebar =
+        document.getElementById("sidebar");
+
+        sidebar.innerHTML = "";
+
+        topics.forEach(topic => {
+
+            const block =
+            document.createElement("div");
+
+            block.className = "topic";
+
+            block.innerHTML = `
+
+                <div class="topic-title">
+
+                    ▶ ${topic.topic}
+
+                </div>
+
+                <div
+                    class="property-list">
+
+                    Loading...
+
+                </div>
+
+            `;
+
+            const title =
+            block.querySelector(".topic-title");
+
+            const propertyList =
+            block.querySelector(".property-list");
+
+            title.onclick = () => {
+
+                if(
+                    propertyList.style.display ===
+                    "block"
+                ){
+                    propertyList.style.display =
+                    "none";
+                    return;
+                }
+
+                propertyList.style.display =
+                "block";
+
+                loadProperties(
+                    topic.topic,
+                    propertyList
+                );
+
+            };
+
+            sidebar.appendChild(block);
+
+        });
+
+    });
+
+}
+
+function loadProperties(
+    topic,
+    container
+){
+
+    fetch(
+`${apiUrl}?action=properties&agency=${encodeURIComponent(agency)}&topic=${encodeURIComponent(topic)}`
+    )
+
+    .then(response => response.json())
+
+    .then(properties => {
+
+        container.innerHTML = "";
+
+        properties.forEach(property => {
+
+            const div =
+            document.createElement("div");
+
+            div.className =
+            "property-item";
+
+            div.innerText =
+            property.property;
+
+            div.onclick = () => {
+
+                loadPersonnel(
+                    topic,
+                    property.property
+                );
+
+            };
+
+            container.appendChild(div);
+
+        });
+
+    });
+
+}
+
+function loadPersonnel(
+    topic,
+    property
+){
+
+fetch(
+`${apiUrl}?action=personnel&agency=${encodeURIComponent(agency)}&topic=${encodeURIComponent(topic)}&property=${encodeURIComponent(property)}`
+)
+
+.then(response => response.json())
+
+.then(data => {
+
+    let html = `
+
+    <h2>${topic}</h2>
+
+    <p>
+        Property: ${property}
+    </p>
+
+    <br>
+
+    <div class="summary">
+
+        <div class="summary-card">
+
+            Personnel
+
+            <div class="summary-number">
+
+                ${data.length}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Name</th>
+
+                <th>Email</th>
+
+                <th>Latest Score</th>
+
+                <th>Status</th>
+
+                <th>Attempts</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+    `;
+
+    data.forEach(person => {
+
+        const statusClass =
+        person.status
+        .toLowerCase()
+        .includes("pass")
+        ? "passed"
+        : "failed";
+
+        html += `
+
+<tr>
+
+    <td>${person.name}</td>
+
+    <td>${person.email}</td>
+
+    <td>${person.latestScore}/10</td>
+
+    <td class="${statusClass}">
+        ${person.status}
+    </td>
+
+    <td>
+
+        <button
+            class="attempt-btn"
+            onclick="showHistory('${person.email}')">
+
+            ${person.attempts}
+
+        </button>
+
+    </td>
+
+</tr>
+
+        `;
+
+    });
+
+    html += `
+        </tbody>
+    </table>
+    `;
+
+    document
+    .getElementById("content")
+    .innerHTML = html;
+
+});
+
+}
+
+function showHistory(email){
+
+    alert(
+        "Assessment History\n\n" +
+        email +
+        "\n\nHistory popup next step."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
