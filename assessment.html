@@ -1,21 +1,181 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Assessments</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Assessment Library</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#f5f7fb;
+    min-height:100vh;
+}
+
+.container{
+    padding:35px;
+}
+
+.header{
+    margin-bottom:30px;
+}
+
+.header h1{
+    font-size:40px;
+    color:#0f172a;
+}
+
+.header p{
+    color:#64748b;
+    margin-top:8px;
+}
+
+.topics{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+    gap:20px;
+}
+
+.topic-card{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+    transition:.2s;
+    cursor:pointer;
+}
+
+.topic-card:hover{
+    transform:translateY(-5px);
+}
+
+.topic-title{
+    font-size:22px;
+    font-weight:700;
+    color:#0f172a;
+    margin-bottom:10px;
+}
+
+.topic-records{
+    font-size:16px;
+    color:#2563eb;
+    font-weight:600;
+}
+
+.back-btn{
+    display:inline-block;
+    margin-top:30px;
+    text-decoration:none;
+    background:#003366;
+    color:white;
+    padding:12px 18px;
+    border-radius:12px;
+}
+
+.back-btn:hover{
+    background:#0055a5;
+}
+
+.loading{
+    font-size:20px;
+    color:#64748b;
+}
+
+</style>
+
 </head>
 <body>
 
-<h1>Assessments</h1>
+<div class="container">
 
-<p>Select an assessment to begin.</p>
+    <div class="header">
 
-<ul>
-<li>Data Privacy Assessment</li>
-<li>Security Awareness Assessment</li>
-<li>Radio Communication Assessment</li>
-</ul>
+        <h1>📚 Assessment Library</h1>
 
-<a href="dashboard.html">← Back to Dashboard</a>
+        <p>
+            View all available assessment topics.
+        </p>
+
+    </div>
+
+    <div class="topics" id="topicsContainer">
+
+        <div class="loading">
+            Loading assessments...
+        </div>
+
+    </div>
+
+    <a herf= "agency-dashboard.html" class="back-btn">
+        ← Back to Dashboard
+    </a>
+
+</div>
+
+<script>
+
+const agency = "AGLIPAY";
+
+const apiUrl =
+"https://script.google.com/macros/s/AKfycbxt7eLgH4ryxGiffBbNcZ61F0UYJ1JJrx_fbS21A5yH4ZSEhozcaEaQoli2Wbt2AxFb/exec";
+
+fetch(
+`${apiUrl}?action=topics&agency=${encodeURIComponent(agency)}`
+)
+
+.then(response => response.json())
+
+.then(data => {
+
+    const container =
+    document.getElementById(
+        "topicsContainer"
+    );
+
+    container.innerHTML = "";
+
+    data.forEach(topic => {
+
+        container.innerHTML += `
+        
+        <div class="topic-card">
+
+            <div class="topic-title">
+                ${topic.topic}
+            </div>
+
+            <div class="topic-records">
+                ${topic.totalRecords} Records
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+})
+
+.catch(error => {
+
+    console.error(error);
+
+    document.getElementById(
+        "topicsContainer"
+    ).innerHTML =
+    "Unable to load assessments.";
+
+});
+
+</script>
 
 </body>
 </html>
